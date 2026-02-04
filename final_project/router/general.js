@@ -3,6 +3,7 @@ let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
 const public_users = express.Router();
+const axios = require('axios');
 
 // Register a new user
 public_users.post("/register", (req,res) => {
@@ -90,5 +91,19 @@ public_users.get('/review/:isbn',function (req, res) {
   res.send(book.reviews);
 
 });
+
+// Getting the list of books using Promise callbacks with Axios
+function getBooks() {
+    axios.get('https://nxn210024-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/')
+        .then(response => {
+            console.log("Books available in the shop:", response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error("Error fetching books:", error.message);
+        });
+}
+
+getBooks();
 
 module.exports.general = public_users;
