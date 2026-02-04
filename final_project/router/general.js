@@ -104,6 +104,20 @@ function getBooks() {
         });
 }
 
+// Getting book by ISBN using Promise callbacks with Axios
+function getBookByISBN(isbn) {
+    return axios.get(`https://nxn210024-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/isbn/${isbn}`)
+        .then(response => {
+            console.log(`Details for ISBN ${isbn}:`, response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error(`Error fetching book details for ISBN ${isbn}:`, error.message);
+        });
+    }
+
+
 getBooks();
+getBookByISBN(1);
 
 module.exports.general = public_users;
