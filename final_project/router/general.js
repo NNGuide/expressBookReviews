@@ -114,10 +114,22 @@ function getBookByISBN(isbn) {
         .catch(error => {
             console.error(`Error fetching book details for ISBN ${isbn}:`, error.message);
         });
-    }
+}
 
+// Getting book by author using Promise callbacks with Axios
+function getBooksByAuthor(author) {
+    return axios.get(`https://nxn210024-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/${author}`)
+        .then(response => {
+            console.log(`Books by author ${author}:`, response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error(`Error fetching books by author ${author}:`, error.message);
+        });
+}
 
 getBooks();
 getBookByISBN(1);
+getBooksByAuthor("Jane Austen");
 
 module.exports.general = public_users;
