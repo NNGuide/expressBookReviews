@@ -128,8 +128,21 @@ function getBooksByAuthor(author) {
         });
 }
 
+// Getting book by title using Promise callbacks with Axios
+function getBooksByTitle(title) {
+    return axios.get(`https://nxn210024-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/${title}`)
+        .then(response => {
+            console.log(`Books by title ${title}:`, response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.error(`Error fetching books by title ${title}:`, error.message);
+        });
+}
+
 getBooks();
 getBookByISBN(1);
 getBooksByAuthor("Jane Austen");
+getBooksByTitle("Molloy, Malone Dies, The Unnamable, the trilogy");
 
 module.exports.general = public_users;
